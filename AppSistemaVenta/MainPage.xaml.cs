@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
+using AppSistemaVenta.Modelos;
 
 namespace AppSistemaVenta
 {
@@ -16,42 +17,34 @@ namespace AppSistemaVenta
         public MainPage()
         {
             InitializeComponent();
+
         }
-
-        // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
-
-        public class Productos
-        {
-            public int idProducto { get; set; }
-            public string codigoBarra { get; set; }
-            public string marca { get; set; }
-            public string descripcion { get; set; }
-            public int idCategoria { get; set; }
-            public int stock { get; set; }
-            public string urlImagen { get; set; }
-            public string nombreImagen { get; set; }
-            public double precio { get; set; }
-            public bool esActivo { get; set; }
-            public DateTime fechaRegistro { get; set; }
-            //public IdCategoriaNavigation idCategoriaNavigation { get; set; }
-        }
-
+        
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            var request = new HttpRequestMessage();
-            request.RequestUri = new Uri("https://cairotest.bsite.net/api/ProductosApi/Lista");
-            request.Method = HttpMethod.Get;
-            request.Headers.Add("Accept", "application/json");
-            var client = new HttpClient();
-            HttpResponseMessage response = await client.SendAsync(request);
-            if (response.StatusCode == HttpStatusCode.OK)
+            Login log = new Login
             {
-                string content = await response.Content.ReadAsStringAsync();
-                var resultado = JsonConvert.DeserializeObject<List<Productos>>(content);
+                Correo = txtEmail.Text,
+                Clave = txtPin.Text
+            };
 
-                ListDemo.ItemsSource=resultado;
-
+            Uri RequestUri = new Uri("https://rcairo09.bsite.net/api/LoginApi/login");
+            var client = new HttpClient();
+            var json = JsonConvert.SerializeObject(log);
+            var contentJson = new StringContent(json,Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(RequestUri, contentJson);
+            if (response.StatusCode==HttpStatusCode.OK) 
+            {
+                await Navigation.PushAsync(new Home());
+            }
+            else
+            {
+                await DisplayAlert("Mensaje", "Datos no válidos", "Ok");
             }
         }
+        
+
+        // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);          
+
     }
 }

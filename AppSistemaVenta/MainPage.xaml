@@ -1,17 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppSistemaVenta.MainPage">
+             x:Class="AppSistemaVenta.MainPage"
+             BackgroundColor="#004a93">
+    <ContentPage.Content>
+        <StackLayout Padding="40" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+            <Image Source="LogoTienda.jpeg" WidthRequest="180" HeightRequest="180"></Image>
+            <Entry Placeholder="Correo" TextColor="White" PlaceholderColor="Gray" x:Name="txtEmail"></Entry>
+            <Entry Placeholder="Clave" IsPassword="True" TextColor="White" PlaceholderColor="Gray" x:Name="txtPin"></Entry>
+            <Button
+                VerticalOptions="Center"
+                Text="Ingresar"
+                TextColor="White"
+                BackgroundColor="Transparent"
+                BorderColor="ForestGreen"
+                BorderWidth="1.5"
+                CornerRadius="50"
+                x:Name="btnLogin" 
+                Clicked="Button_Clicked"
+                >
+            </Button>
+        </StackLayout>
+    </ContentPage.Content>
 
-    <StackLayout Padding="12,0,12,12" Spacing="6">
-        <Button Text="Llamado API" Clicked="Button_Clicked"/>
-        <ListView x:Name="ListDemo">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding id}" Detail="{Binding descripcion}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
 
 </ContentPage>
