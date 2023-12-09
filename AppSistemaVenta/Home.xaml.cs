@@ -44,10 +44,10 @@ namespace AppSistemaVenta
             public IdCategoriaNavigation idCategoriaNavigation { get; set; }
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
+        public async Task CargarListaProductos()
         {
             var request = new HttpRequestMessage();
-            request.RequestUri = new Uri("https://rcairo09.bsite.net/api/ProductosApi/Lista");
+            request.RequestUri = new Uri("https://cairotest.bsite.net/api/ProductosApi/Lista");
             request.Method = HttpMethod.Get;
             request.Headers.Add("Accept", "application/json");
             var client = new HttpClient();
@@ -58,9 +58,7 @@ namespace AppSistemaVenta
                 var resultado = JsonConvert.DeserializeObject<List<Productos>>(content);
 
                 ListDemo.ItemsSource = resultado;
-
             }
-
         }
     }
 }

@@ -3,13 +3,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppSistemaVenta.Home">
     <StackLayout Padding="12,0,12,12" Spacing="6">
-        <Button Text="Llamado API" Clicked="Button_Clicked"/>
-        <ListView x:Name="ListDemo">
+        <ListView x:Name="ListDemo" 
+                  BackgroundColor="Transparent"
+                  HasUnevenRows="True"
+                  SeparatorColor="Red">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding id}" Detail="{Binding descripcion}"/>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Frame CornerRadius="20"
+                                   HasShadow="True">
+                                <StackLayout>
+                                    <Image Source="{Binding urlImagen}"
+                                           WidthRequest="100"/>
+                                    <Label VerticalOptions="Center"
+                                           FontSize="Large">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Marca: " 
+                                                      FontAttributes="Bold"
+                                                      FontSize="Large"/>
+                                                <Span Text="{Binding marca}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label VerticalOptions="Center"
+                                            FontSize="Large">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Descripción: " 
+                                                      FontAttributes="Bold"
+                                                      FontSize="Large"/>
+                                                <Span Text="{Binding descripcion}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label VerticalOptions="Center"
+                                           FontSize="Large">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Existencias: " 
+                                                      FontAttributes="Bold"
+                                                      FontSize="Large"/>
+                                                <Span Text="{Binding stock}" />
+                                                <Span Text=" unidades" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label VerticalOptions="Center"
+                                           FontSize="Large">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Precio: " 
+                                                      FontAttributes="Bold"
+                                                      FontSize="Large"/>
+                                                <Span Text="C$ " />
+                                                <Span Text="{Binding precio}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
 </ContentPage>
+

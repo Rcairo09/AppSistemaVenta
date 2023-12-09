@@ -35,7 +35,7 @@ namespace AppSistemaVenta
             var response = await client.PostAsync(RequestUri, contentJson);
             if (response.StatusCode==HttpStatusCode.OK) 
             {
-                await Navigation.PushAsync(new Home());
+                await Navigation.PushAsync(new BotonesInicio());
             }
             else
             {
